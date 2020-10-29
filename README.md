@@ -1,10 +1,12 @@
 # *cytosieve* - An R package for _in silico_ cytometric filtering of bulk sequencing data with transcriptional profiles.
 <h3 align = "right">Colby T. Ford, Ph.D., Daniel Kepple, Daniel Janies, Ph.D., Eugenia Lo, Ph.D.</h3>
 
-<img align="right" src="https://raw.github.com/colbyford/cytosieve/blob/main/img/cytosieve_hex.png" alt="cytosieve icon" width="200">
+<img align="right" src="https://raw.githubusercontent.com/colbyford/cytosieve/main/img/cytosieve_hex.png" alt="cytosieve icon" width="200">
 
 ## Motivation
 Bulk sequencing, as compared to single cell sequencing, is a more cost-effective method of sequencing cells and offers useful insights into comparative transcriptomics. However, bulk sequencing is insufficient for studies that need the information of a single cell type among heterogeneous assortments of cells in a single sample.
+
+<img align="right" src="https://raw.githubusercontent.com/colbyford/cytosieve/main/img/process.png" width=500>
 
 ## Installation
 ```r
