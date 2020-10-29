@@ -28,16 +28,16 @@ library(stringr)
 genes <- readDNAStringSet("data/filter_genes.fasta") # The exclusion list of sequences
 
 ## A paired set of sample reads
-input_R1_fastq_path <- "data/sample_r1_1000reads.fastq"
+input_R1_fastq_path <- "data/sample_r1_reads.fastq"
 output_R1_fastq_path <- paste0(str_remove(input_R1_fastq_path, ".fastq"), "_filtered.fastq")
-input_R2_fastq_path <- "data/sample_r2_1000reads.fastq"
+input_R2_fastq_path <- "data/sample_r2_reads.fastq"
 output_R2_fastq_path <- paste0(str_remove(input_R2_fastq_path, ".fastq"), "_filtered.fastq")
 
 ## Filter out reads from the input R1 and R2 sample files
 filter_reads(input_path = input_R1_fastq_path,
              output_path = output_R1_fastq_path,
-             genes_to_find = genes, # Genes that do not occur in the desired cell type
-             eliminate_matches = TRUE, # Remove genes that match from the exclusion list
+             genes_to_find = genes,       # Genes that do not occur in the desired cell type
+             eliminate_matches = TRUE,    # Remove genes that match from the exclusion list
              pct_variability = 0.10,
              paired = TRUE,
              input_r2_path = input_R2_fastq_path,
