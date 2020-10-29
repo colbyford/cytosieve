@@ -26,4 +26,5 @@ filter_reads(input_path = input_R1_fastq_path,
              pct_variability = 0.10,
              paired = TRUE,
              input_r2_path = input_R2_fastq_path,
-             output_r2_path = output_R2_fastq_path)
+             output_r2_path = output_R2_fastq_path,
+             verbose = FALSE)

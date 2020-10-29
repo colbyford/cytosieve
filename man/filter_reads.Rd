@@ -6,7 +6,7 @@
 \usage{
 filter_reads(input_path, output_path, genes_to_find = NULL,
   eliminate_matches = TRUE, pct_variability = 0.1, paired = FALSE,
-  input_r2_path = NULL, output_r2_path = NULL)
+  input_r2_path = NULL, output_r2_path = NULL, verbose = TRUE)
 }
 \arguments{
 \item{input_path}{String. Path to the input .fastq file.}
@@ -25,6 +25,8 @@ If TRUE, then reads that are filtered from the R1 file will also be removed from
 \item{input_r2_path}{String. Path to the input (reverse) .fastq file. (Optional, only used when paired = TRUE)}
 
 \item{output_r2_path}{String. Desired path to the output (reverse) filtered .fastq file. (Optional, only used when paired = TRUE)}
+
+\item{verbose}{Logical. Should the process print out which read and gene it is currently searching? (Default: TRUE)}
 }
 \description{
 Filter out reads that have genes that are not expressed in a particular stage/cell type of interest.

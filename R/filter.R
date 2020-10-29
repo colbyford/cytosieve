@@ -10,6 +10,7 @@
 #' If TRUE, then reads that are filtered from the R1 file will also be removed from the R2 file.  (Default: FALSE)
 #' @param input_r2_path String. Path to the input (reverse) .fastq file. (Optional, only used when paired = TRUE)
 #' @param output_r2_path String. Desired path to the output (reverse) filtered .fastq file. (Optional, only used when paired = TRUE)
+#' @param verbose Logical. Should the process print out which read and gene it is currently searching? (Default: TRUE)
 #'
 #' @description Filter out reads that have genes that are not expressed in a particular stage/cell type of interest.
 #' Generates a FASTQ file by filtering out reads based on a reference set of gene sequences.
@@ -22,7 +23,8 @@ filter_reads <- function(input_path,
                          pct_variability = 0.10,
                          paired = FALSE,
                          input_r2_path = NULL,
-                         output_r2_path = NULL){
+                         output_r2_path = NULL,
+                         verbose = TRUE){
 
   ext <- strsplit(basename(input_path), split="\\.")[[1]][2]
   if(ext != "fastq"){
@@ -37,7 +39,7 @@ filter_reads <- function(input_path,
   ## Find the read segment in the reference gene(s)
   search_read <- function(x, genes = genes_to_find, percentage = pct_variability){
 
-    cat("Searching for matches in read: ", x, "\n")
+    if(verbose){cat("Searching for matches in read: ", x, "\n")}
 
     read <- fastq_orig@sread[x] %>% as.character()
 
@@ -46,7 +48,7 @@ filter_reads <- function(input_path,
     for (g in seq_along(genes)){
       gene <- genes[g] %>% as.character()
 
-      cat("\tSearching filter gene: ", names(gene), "\n")
+      if(verbose){cat("\tSearching filter gene: ", names(gene), "\n")}
 
       read_matches <- Biostrings::matchPattern(read,
                                                gene %>%
@@ -130,11 +132,19 @@ filter_reads <- function(input_path,
   cat("***Found",
       length(which(match_list)), "match(es) out of",
       length(fastq_orig@sread), "reads by searching across",
-      length(genes_to_find),"genes.***\n")
+      length(genes_to_find), "genes.***\n")
 
   ## Filter FASTQ(s)
-  filterFastq(input_path, output_path, filter=fun, compress=FALSE)
+  fastq_filtered <- fastq_orig[-which(match_list)]
+  ShortRead::writeFastq(fastq_filtered, file=output_path, compress=FALSE)
+  # filterFastq(input_path, output_path, filter=fun, compress=FALSE)
 
-  if(paired){filterFastq(input_r2_path, output_r2_path, filter=fun, compress=FALSE)}
+  if(paired){
+    fastq_r2_orig <- ShortRead::readFastq(input_r2_path)
+    fastq_r2_filtered <- fastq_r2_orig[-which(match_list)]
+    ShortRead::writeFastq(fastq_r2_filtered, file=output_r2_path, compress=FALSE)
+    # filterFastq(input_r2_path, output_r2_path, filter=fun, compress=FALSE)
+    }
 
+  # return(which(match_list))
 }
