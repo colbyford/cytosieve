@@ -10,6 +10,8 @@ Using transcriptional profiles, like those used in tools like [CIBERSORTx](https
 
 <img align="right" src="https://raw.githubusercontent.com/colbyford/cytosieve/main/img/process.png" width=500>
 
+--------------------------
+
 ## Installation
 ```r
 # install.packages("devtools")
@@ -36,8 +38,8 @@ output_R2_fastq_path <- paste0(str_remove(input_R2_fastq_path, ".fastq"), "_filt
 ## Filter out reads from the input R1 (and R2) sample files
 filter_reads(input_path = input_R1_fastq_path,
              output_path = output_R1_fastq_path,
-             genes_to_find = genes,       # Genes that do not occur in the desired cell type
-             eliminate_matches = TRUE,    # Remove genes that match from the exclusion list
+             genes_to_find = genes,                 # Genes that do not occur in the desired cell type
+             eliminate_matches = TRUE,              # Remove genes that match from the exclusion list
              pct_variability = 0.10,
              paired = TRUE,                         # Optional
              input_r2_path = input_R2_fastq_path,   # Optional
