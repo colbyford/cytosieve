@@ -39,8 +39,8 @@ filter_reads(input_path = input_R1_fastq_path,
              genes_to_find = genes,       # Genes that do not occur in the desired cell type
              eliminate_matches = TRUE,    # Remove genes that match from the exclusion list
              pct_variability = 0.10,
-             paired = TRUE,
-             input_r2_path = input_R2_fastq_path,
-             output_r2_path = output_R2_fastq_path,
+             paired = TRUE,                         # Optional
+             input_r2_path = input_R2_fastq_path,   # Optional
+             output_r2_path = output_R2_fastq_path, # Optional
              verbose = FALSE)
 ```
