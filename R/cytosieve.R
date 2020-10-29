@@ -2,7 +2,7 @@
 #' @title cytosieve
 #'
 #' @description cytosieve provides functionality for in silico cytometric filtering of bulk sequencing data using transcriptional profiles.
-#' @keywords genomics phylogenetics cytology bioinformatics biology
+#' @keywords genomics cytology cytometry bioinformatics biology
 #'
 #' @docType package
 #' @name cytosieve-package
