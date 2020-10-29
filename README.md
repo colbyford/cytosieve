@@ -6,6 +6,8 @@
 ## Motivation
 Bulk sequencing, as compared to single cell sequencing, is a more cost-effective method of sequencing cells and offers useful insights into comparative transcriptomics. However, bulk sequencing is insufficient for studies that need the information of a single cell type among heterogeneous assortments of cells in a single sample.
 
+Using transcriptional profiles, like those used in tools like [CIBERSORTx](https://cibersortx.stanford.edu/), a list of exclusion or inclusion genes by which to filter can be defined. Using this list of a genes, we can remove a given read if the read is part of a gene that is not expressed in the cell type of interest.
+
 <img align="right" src="https://raw.githubusercontent.com/colbyford/cytosieve/main/img/process.png" width=500>
 
 ## Installation
@@ -22,8 +24,8 @@ library(cytosieve)
 library(Biostrings)
 library(stringr)
 
-## Genes that are NOT expressed in the cell type of interest
-genes <- readDNAStringSet("data/filter_genes.fasta")
+## Define genes that are NOT expressed in the cell type of interest
+genes <- readDNAStringSet("data/filter_genes.fasta") # The exclusion list of sequences
 
 ## A paired set of sample reads
 input_R1_fastq_path <- "data/sample_r1_1000reads.fastq"
@@ -31,10 +33,11 @@ output_R1_fastq_path <- paste0(str_remove(input_R1_fastq_path, ".fastq"), "_filt
 input_R2_fastq_path <- "data/sample_r2_1000reads.fastq"
 output_R2_fastq_path <- paste0(str_remove(input_R2_fastq_path, ".fastq"), "_filtered.fastq")
 
+## Filter out reads from the input R1 and R2 sample files
 filter_reads(input_path = input_R1_fastq_path,
              output_path = output_R1_fastq_path,
-             genes_to_find = genes,
-             eliminate_matches = TRUE,
+             genes_to_find = genes, # Genes that do not occur in the desired cell type
+             eliminate_matches = TRUE, # Remove genes that match from the exclusion list
              pct_variability = 0.10,
              paired = TRUE,
              input_r2_path = input_R2_fastq_path,
