@@ -27,13 +27,13 @@ library(stringr)
 ## Define genes that are NOT expressed in the cell type of interest
 genes <- readDNAStringSet("data/filter_genes.fasta") # The exclusion list of sequences
 
-## A paired set of sample reads
+## A paired set of sample reads (can also be run on non-paired samples)
 input_R1_fastq_path <- "data/sample_r1_reads.fastq"
 output_R1_fastq_path <- paste0(str_remove(input_R1_fastq_path, ".fastq"), "_filtered.fastq")
 input_R2_fastq_path <- "data/sample_r2_reads.fastq"
 output_R2_fastq_path <- paste0(str_remove(input_R2_fastq_path, ".fastq"), "_filtered.fastq")
 
-## Filter out reads from the input R1 and R2 sample files
+## Filter out reads from the input R1 (and R2) sample files
 filter_reads(input_path = input_R1_fastq_path,
              output_path = output_R1_fastq_path,
              genes_to_find = genes,       # Genes that do not occur in the desired cell type
