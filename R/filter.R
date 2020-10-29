@@ -57,7 +57,7 @@ filter_reads <- function(input_path,
                                                max.mismatch = mismatch_threshold)
 
       if (length(read_matches) > 0){
-        cat("\t[Found a match!]\n")
+        cat("\tFound a match!: [ Read:", x, ", Gene:", names(gene),"]\n")
         # match_list[x] = TRUE
         # return(TRUE)
         match_found <- TRUE
