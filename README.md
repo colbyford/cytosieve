@@ -1,4 +1,4 @@
-# *cytosieve* - An R package for _in silico_ cytometric filtering of bulk sequencing data with transcriptional profiles.
+# *cytosieve* - An R package for _in silico_ cytometric filtering of bulk sequencing data using transcriptional profiles.
 <h3 align = "right">Colby T. Ford, Ph.D., Daniel Kepple, Daniel Janies, Ph.D., and Eugenia Lo, Ph.D.</h3>
 
 <img align="right" src="https://raw.githubusercontent.com/colbyford/cytosieve/main/img/cytosieve_hex.png" alt="cytosieve icon" width="200">
