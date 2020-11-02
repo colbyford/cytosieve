@@ -6,7 +6,7 @@
 \alias{cytosieve}
 \title{cytosieve}
 \description{
-cytosieve provides functionality for in silico cytometric filtering of bulk sequencing data with transcriptional profiles.
+cytosieve provides functionality for in silico cytometric filtering of bulk sequencing data using transcriptional profiles.
 }
 \details{
 ############################
@@ -20,5 +20,5 @@ Colby T. Ford, \email{colby.ford@uncc.edu} \url{https://orcid.org/0000-0002-7859
 \keyword{bioinformatics}
 \keyword{biology}
 \keyword{cytology}
+\keyword{cytometry}
 \keyword{genomics}
-\keyword{phylogenetics}

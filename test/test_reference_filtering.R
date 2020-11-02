@@ -5,7 +5,7 @@ library(dplyr)
 library(tidyr)
 
 ## Genes that are NOT expressed in Schizonts
-genes <- readDNAStringSet("data/Pvivax_schizont_filter_all29.fasta")[1:5]
+genes <- readDNAStringSet("data/Pvivax_schizont_filter_all29.fasta")
 
 gene_name_pattern = "PVP01_[0-9]+"
 gene_names <- names(genes) %>% str_extract(gene_name_pattern)
@@ -33,23 +33,8 @@ gene_names <- names(genes) %>% str_extract(gene_name_pattern)
 input_gff_path <- "test/schizont_test/reference_filtering/PlasmoDB-48_PvivaxP01.gff"
 output_gff_path <- paste0(str_remove(input_gff_path, ".gff"), "_filtered.gff")
 
-gff_header <- readLines(input_gff_path)
-gff_header <- gff_header[startsWith(gff_header, "##")]
+gff <- read_gff(input_gff_path)
 
+gff_filtered <- filter_reference(gff, gene_names)
 
-gff_body <- ape::read.gff(input_gff_path)
-
-gff_body_filtered <- gff_body %>%
-  mutate(ID = stringr::str_extract(attributes, "(?<=ID=)([A-Za-z0-9\\-\\_\\.]+)(?=;)")) %>%
-  filter(ID %in% gene_names) %>%
-  select(-ID)
-
-
-read_gff <- function(x, path){
-
-}
-
-
-write_gff <- function(x, path){
-
-}
+write_gff(gff_filtered, path = output_gff_path, append = FALSE)

@@ -13,6 +13,7 @@
 #' @import ShortRead
 #' @import Biostrings
 #' @import dplyr
+#' @import tidyr
 #' @import stringr
 #'
 #' @seealso \url{https://github.com/colbyford/cytosieve}
