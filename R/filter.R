@@ -28,7 +28,7 @@ filter_reads <- function(input_path,
 
   ext <- strsplit(basename(input_path), split="\\.")[[1]][2]
   if(ext != "fastq"){
-    stop("Your input file is not in the FASTQ format.\nCurrently, this package only supports .fastq input files.")
+    stop("Your input file is not in the FASTQ format.\nCurrently, this function only supports .fastq input files.")
   }
 
   fastq_orig <- ShortRead::readFastq(input_path)
