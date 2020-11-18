@@ -10,6 +10,8 @@
 #' If TRUE, then reads that are filtered from the R1 file will also be removed from the R2 file.  (Default: FALSE)
 #' @param input_r2_path String. Path to the input (reverse) .fastq file. (Optional, only used when paired = TRUE)
 #' @param output_r2_path String. Desired path to the output (reverse) filtered .fastq file. (Optional, only used when paired = TRUE)
+#' @param par_method String. Either "multicore" for single node parallelism or "foreach" for foreach-based distribution.
+#' If "foreach" is used, then this tasks will be distributed according to the doParallel, doMPI, doSnow, etc. specifications. (Default = "multicore")
 #' @param verbose Logical. Should the process print out which read and gene it is currently searching? (Default: TRUE)
 #'
 #' @description Filter out reads that have genes that are not expressed in a particular stage/cell type of interest.
@@ -24,6 +26,7 @@ filter_reads <- function(input_path,
                          paired = FALSE,
                          input_r2_path = NULL,
                          output_r2_path = NULL,
+                         par_method = "multicore",
                          verbose = TRUE){
 
   ext <- strsplit(basename(input_path), split="\\.")[[1]][2]
@@ -80,13 +83,26 @@ filter_reads <- function(input_path,
 
   }
 
-  match_list <- mclapply(seq_along(fastq_orig@sread),
-                         search_read,
-                         mc.cores = if (.Platform$OS.type == "windows"){
-                           1
-                         } else {
-                           parallel::detectCores()-1
-                         }) %>% unlist()
+  if (par_method == "multicore"){
+    match_list <- mclapply(seq_along(fastq_orig@sread),
+                           search_read,
+                           mc.cores = if (.Platform$OS.type == "windows"){
+                             1
+                           } else {
+                             parallel::detectCores()-1
+                           }) %>% unlist()
+
+  } else if (par_method == "foreach"){
+    match_list <- foreach (row = seq_along(fastq_orig@sread), .combine = rbind, .packages = "cytosieve") %dopar% {
+      search_read(row,
+                  genes = genes_to_find,
+                  percentage = pct_variability)
+    }
+
+  } else {
+    stop("One of `multicore` or `foreach` parallelization methods must be selected.")
+  }
+
 
   # match_list <- (match_list + match_list_iter) %>%
   #   as.logical()

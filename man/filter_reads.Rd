@@ -6,7 +6,8 @@
 \usage{
 filter_reads(input_path, output_path, genes_to_find = NULL,
   eliminate_matches = TRUE, pct_variability = 0.1, paired = FALSE,
-  input_r2_path = NULL, output_r2_path = NULL, verbose = TRUE)
+  input_r2_path = NULL, output_r2_path = NULL,
+  par_method = "multicore", verbose = TRUE)
 }
 \arguments{
 \item{input_path}{String. Path to the input .fastq file.}
@@ -25,6 +26,9 @@ If TRUE, then reads that are filtered from the R1 file will also be removed from
 \item{input_r2_path}{String. Path to the input (reverse) .fastq file. (Optional, only used when paired = TRUE)}
 
 \item{output_r2_path}{String. Desired path to the output (reverse) filtered .fastq file. (Optional, only used when paired = TRUE)}
+
+\item{par_method}{String. Either "multicore" for single node parallelism or "foreach" for foreach-based distribution.
+If "foreach" is used, then this tasks will be distributed according to the doParallel, doMPI, doSnow, etc. specifications. (Default = "multicore")}
 
 \item{verbose}{Logical. Should the process print out which read and gene it is currently searching? (Default: TRUE)}
 }

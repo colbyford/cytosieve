@@ -15,6 +15,7 @@
 #' @import dplyr
 #' @import tidyr
 #' @import stringr
+#' @import foreach
 #'
 #' @seealso \url{https://github.com/colbyford/cytosieve}
 
