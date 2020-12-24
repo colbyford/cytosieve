@@ -1,0 +1,3 @@
+"file_original","file_filtered","records_in_original","records_in_filtered"
+"GHC-006_filtered_output.bam","GHC-006_filtered_output_filtered.bam",67075571,11985373
+"GHC-006_output.bam","GHC-006_output_filtered.bam",67095470,11988467

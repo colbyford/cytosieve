@@ -1,0 +1,3 @@
+SampleID	FileR1	FileR2
+GHC-006	reads/GHC-006_R1_001.fastq	reads/GHC-006_R2_001.fastq
+GHC-006_filtered	reads/GHC-006_R1_001_filtered.fastq	reads/GHC-006_R2_001_filtered.fastq
